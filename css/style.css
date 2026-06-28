@@ -1,0 +1,120 @@
+/* ==========================
+   VIDEO DE FONDO + OVERLAY
+   ========================== */
+
+#bg-video {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 1;
+}
+
+header,
+main,
+#carouselDebora {
+  position: relative;
+  z-index: 2;
+}
+
+/* Footer: solo letras (no banner/video/overlay) */
+footer {
+  color: rgba(255, 255, 255, 1) !important;
+}
+
+
+
+/* ==========================
+   CARRUSEL (Bootstrap)
+   ========================== */
+
+#carouselDebora {
+  margin-top: 40px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+#carouselDebora .carousel-inner,
+#carouselDebora .carousel-item {
+  height: 420px;
+}
+
+#carouselDebora .carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s ease;
+  transform: scale(1.08);
+}
+
+/* Efecto zoom out + “fade out” con desplazamiento hacia abajo */
+#carouselDebora .carousel-item img {
+  transform: translateY(0) scale(1.08);
+  transition: transform 0.9s ease, opacity 0.9s ease;
+}
+
+#carouselDebora .carousel-item.active img {
+  transform: translateY(0) scale(1.00);
+  opacity: 0.85;
+}
+
+#carouselDebora .carousel-item:not(.active) img {
+  /* cuando sale (fade out), que baje un poco (translucido sutil) */
+  opacity: 0.45;
+  transform: translateY(18px) scale(1.04);
+}
+
+
+
+
+@media (max-width: 768px) {
+
+  #carouselDebora .carousel-inner,
+  #carouselDebora .carousel-item {
+    height: 260px;
+  }
+}
+
+/* ==========================
+   (Opcional) Ajuste general
+   ========================== */
+
+body {
+  background: #111;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

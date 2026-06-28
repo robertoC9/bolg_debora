@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Contratos - Débora Inostroza Molina</title>>
+  <link rel="stylesheet" href="../../css/style.css">
+
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<!-- VIDEO DE FONDO -->
+<video autoplay muted loop playsinline id="bg-video">
+  <source src="../../video/Video.mp4" type="video/mp4">
+</video>
+
+<!-- CAPA OSCURA PARA LEER MEJOR -->
+<div class="overlay"></div>
+
+
+<header class="text-center text-white py-5" style="background: rgba(0,0,0,0.35); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border-bottom: 1px solid rgba(255,255,255,0.12); position: relative;">
+  <h1 class="display-4">Debora´s-News</h1>
+</header>
+
+<main>
+  <!-- HISTORIAS (futuro backend) -->
+  <section id="historias" class="historias-section">
+    <div class="historias-head">
+      <h2>Historias de Débora</h2>
+      <p class="text-muted">
+        Esta sección está lista para mostrar historias en cualquier momento. Por ahora, la carga depende del backend.
+      </p>
+    </div>
+
+    <div class="historias-controls">
+      <div id="historias-status" class="historias-status" aria-live="polite"></div>
+
+      <button
+        id="historia-add-btn"
+        class="btn btn-secondary"
+        type="button"
+        disabled
+      >
+        Agregar historia (próximamente)
+      </button>
+    </div>
+
+    <div id="historias-list" class="historias-list"></div>
+  </section>
+</main>
+
+<!-- Scripts subcarpeta -->
+<script src="main.js"></script>
+<script src="historias.js"></script>
+
+<footer class="text-white" style="position: relative; z-index: 2; padding: 18px 16px; background: rgba(0,0,0,0.35); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border-top: 1px solid rgba(255,255,255,0.12);">
+  <p style="margin: 0 0 8px;">&copy; 2026 Blog de Débora Inostroza Molina</p>
+  <div style="font-size: 0.95rem; opacity: 0.9;">
+    Hora local: <strong id="hora-local">--:--:--</strong>
+    <span id="hora-zona" style="opacity: 0.75;"></span>
+  </div>
+  <div class="home-back-wrap">
+    <div style="display:flex; align-items:center; gap:14px; justify-content:space-between; flex-wrap:wrap;">
+      <a
+        id="home-back-btn"
+        class="home-back-btn"
+        href="../../index.html"
+        aria-label="Volver a la página principal"
+      >
+        <span class="home-back-btn__icon" aria-hidden="true">↩</span>
+        <span class="home-back-btn__label">Volver a Home</span>
+      </a>
+
+      <a
+        id="reflexiones-back-btn"
+        class="home-back-btn"
+        href="../reflexiones/index.html"
+        aria-label="Ir a la página de Reflexiones"
+        style="margin-left:auto;"
+      >
+        <span class="home-back-btn__icon" aria-hidden="true">💭</span>
+        <span class="home-back-btn__label">Ir a Reflexiones</span>
+      </a>
+    </div>
+
+    <div class="home-back-subtitle">Página principal del blog</div>
+  </div>
+</footer>
+
+<script>
+
+  // Hora en tiempo real con API (worldtimeapi.org)
+  (function () {
+
+    const horaEl = document.getElementById('hora-local');
+    const zonaEl = document.getElementById('hora-zona');
+    if (!horaEl) return;
+
+    const pad2 = (n) => String(n).padStart(2, '0');
+
+    const render = (date) => {
+      const hh = pad2(date.getHours());
+      const mm = pad2(date.getMinutes());
+      const ss = pad2(date.getSeconds());
+      horaEl.textContent = `${hh}:${mm}:${ss}`;
+    };
+
+    const setZoneLabel = (tz) => {
+      if (!zonaEl) return;
+      zonaEl.textContent = tz ? ` (${tz})` : '';
+    };
+
+    const startClockFromOffset = (serverDate) => {
+      // Ajuste para que el reloj siga “vivo” aunque la API solo se llame una vez.
+      const serverMs = serverDate.getTime();
+      const startMs = Date.now();
+      render(new Date(serverMs + (Date.now() - startMs)));
+
+      setZoneLabel(Intl.DateTimeFormat().resolvedOptions().timeZone || 'Local');
+
+      setInterval(() => {
+        const now = serverMs + (Date.now() - startMs);
+        render(new Date(now));
+      }, 1000);
+    };
+
+    // Endpoint: zona horaria de Argentina (asumimos -03:00)
+    // Si prefieres otra, cambias la ruta a la zona que quieras.
+    const ENDPOINT = 'https://worldtimeapi.org/api/timezone/America/Argentina/Buenos_Aires';
+
+    fetch(ENDPOINT)
+      .then((r) => {
+        if (!r.ok) throw new Error('No se pudo obtener la hora');
+        return r.json();
+      })
+      .then((data) => {
+        // data.datetime viene en ISO8601
+        const serverDate = new Date(data.datetime);
+        if (Number.isNaN(serverDate.getTime())) throw new Error('Fecha inválida');
+        setZoneLabel(data.timezone || 'Chile');
+        startClockFromOffset(serverDate);
+      })
+      .catch(() => {
+        // Fallback local si no hay red.
+        const now = new Date();
+        render(now);
+        setZoneLabel(Intl.DateTimeFormat().resolvedOptions().timeZone || 'Local');
+        setInterval(() => render(new Date()), 1000);
+      });
+  })();
+</script>
+
+</body>
+</html>
+

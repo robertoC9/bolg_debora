@@ -1,0 +1,142 @@
+/* Estilos exclusivos para Contratos (subcarpeta) */
+
+/* En esta subcarpeta usamos la misma estética base del sitio (background/video/overlay)
+   pero estilos puntuales para la sección de historias. */
+
+/* Ajuste visual para que el video de fondo/overlay se vea bien */
+#bg-video {
+  z-index: 0;
+}
+
+.overlay {
+  z-index: 1;
+}
+
+header,
+main,
+footer {
+  position: relative;
+  z-index: 2;
+  color: rgba(255, 255, 255, 1) !important;
+}
+
+/* Footer: solo letras (no banner/video/overlay) */
+footer {
+  color: rgba(255, 255, 255, 1) !important;
+}
+
+
+
+.historias-section {
+  margin-top: 48px;
+  color: #fff;
+}
+
+
+.historias-head {
+  margin-bottom: 18px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.historias-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.historias-status {
+  min-height: 22px;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.95rem;
+}
+
+.historias-list {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 14px;
+}
+
+.historia-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.historia-title {
+  margin: 0 0 10px;
+  font-size: 1.15rem;
+}
+
+.historia-text {
+  margin: 0 0 12px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.historia-meta {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@media (min-width: 768px) {
+  .historias-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Botón volver a Home */
+.home-back-wrap {
+  position: relative;
+  z-index: 2;
+  padding: 12px 16px;
+  margin-top: 10px;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  text-align: center;
+}
+
+.home-back-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.95) !important;
+  text-decoration: none;
+  width: 100%;
+  max-width: 360px;
+  transition: transform 140ms ease, background 140ms ease, border-color 140ms ease;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.home-back-btn:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.40);
+}
+
+.home-back-btn:active {
+  transform: translateY(0);
+}
+
+.home-back-btn__icon {
+  font-size: 1.1rem;
+  opacity: 0.95;
+}
+
+.home-back-btn__label {
+  font-weight: 600;
+}
+
+.home-back-subtitle {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  opacity: 0.75;
+}
+
+

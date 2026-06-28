@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Reflexiones - Débora Inostroza Molina</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <!-- Background con el mismo MP4 que la página principal -->
+  <video id="bg-video" autoplay muted loop playsinline>
+    <source src="../../video/Video.mp4" type="video/mp4">
+  </video>
+  <div class="overlay" aria-hidden="true"></div>
+
+  <header class="reflexiones-header">
+    <div class="reflexiones-header__left">
+      <h1>Reflexiones De Debbie</h1>
+    </div>
+
+    <div class="reflexiones-header__actions" aria-label="Navegación">
+      <a class="reflexiones-nav-btn" href="../Debbies-News/index.html" aria-label="Ir a Debora's News">Debora´s News</a>
+      <a class="reflexiones-nav-btn" href="../Redes sociales/index.html" aria-label="Ir a Redes sociales">Redes sociales</a>
+    </div>
+
+    <!-- Fecha/hora debajo de los botones del header -->
+    <div class="reflexiones-header__datetime">
+      <span id="footer-datetime">--/--/---- --:--:--</span>
+    </div>
+  </header>
+
+
+  <!-- Footer banner translucido con el logo + slide de fotos -->
+  <footer class="reflexiones-footer banner-datetime" aria-label="Footer">
+    <div class="banner-datetime__inner">
+      <div class="banner-datetime__logo">
+        <img id="logo2" src="../../img/logo2.png" alt="Logo 2">
+      </div>
+    </div>
+
+    <h2 class="reflexiones-footer__tales">Debbie´s Tales</h2>
+
+    <!-- Doble slide de fotos debajo del banner (dos carruseles alternados) -->
+    <div class="footer-photo-slider-row" aria-label="Galería de fotos">
+
+      <div class="footer-photo-slider footer-photo-slider--primary" aria-label="Galería principal">
+        <div class="footer-photo-slider__slide is-active" aria-hidden="true"><img src="../../foto-01.jpeg" alt="Foto 01"></div>
+        <div class="footer-photo-slider__slide" aria-hidden="true"><img src="../../foto-02.jpeg" alt="Foto 02"></div>
+        <div class="footer-photo-slider__slide" aria-hidden="true"><img src="../../foto-04.jpeg" alt="Foto 04"></div>
+        <div class="footer-photo-slider__slide" aria-hidden="true"><img src="../../foto-05.jpeg" alt="Foto 05"></div>
+        <div class="footer-photo-slider__slide" aria-hidden="true"><img src="../../foto-06.jpeg" alt="Foto 06"></div>
+        <div class="footer-photo-slider__slide" aria-hidden="true"><img src="../../foto-07.jpeg" alt="Foto 07"></div>
+        <div class="footer-photo-slider__slide" aria-hidden="true"><img src="../../foto-08.jpeg" alt="Foto 08"></div>
+        <div class="footer-photo-slider__slide" aria-hidden="true"><img src="../../foto-09.jpeg" alt="Foto 09"></div>
+        <div class="footer-photo-slider__slide" aria-hidden="true"><img src="../../foto-10.jpeg" alt="Foto 10"></div>
+        <div class="footer-photo-slider__slide" aria-hidden="true"><img src="../../foto-11.jpeg" alt="Foto 11"></div>
+        <div class="footer-photo-slider__slide" aria-hidden="true"><img src="../../foto-12.jpeg" alt="Foto 12"></div>
+        <div class="footer-photo-slider__slide" aria-hidden="true"><img src="../../foto-o3.jpeg" alt="Foto 03"></div>
+      </div>
+
+      <div class="footer-photo-slider footer-photo-slider--secondary" aria-label="Galería secundaria">
+        <div class="footer-photo-slider__slide" aria-hidden="true"><img src="../../foto-01.jpeg" alt="Foto 01"></div>
+        <div class="footer-photo-slider__slide" aria-hidden="true"><img src="../../foto-02.jpeg" alt="Foto 02"></div>
+        <div class="footer-photo-slider__slide" aria-hidden="true"><img src="../../foto-04.jpeg" alt="Foto 04"></div>
+        <div class="footer-photo-slider__slide" aria-hidden="true"><img src="../../foto-05.jpeg" alt="Foto 05"></div>
+        <div class="footer-photo-slider__slide" aria-hidden="true"><img src="../../foto-06.jpeg" alt="Foto 06"></div>
+        <div class="footer-photo-slider__slide" aria-hidden="true"><img src="../../foto-07.jpeg" alt="Foto 07"></div>
+        <div class="footer-photo-slider__slide" aria-hidden="true"><img src="../../foto-08.jpeg" alt="Foto 08"></div>
+        <div class="footer-photo-slider__slide" aria-hidden="true"><img src="../../foto-09.jpeg" alt="Foto 09"></div>
+        <div class="footer-photo-slider__slide" aria-hidden="true"><img src="../../foto-10.jpeg" alt="Foto 10"></div>
+        <div class="footer-photo-slider__slide" aria-hidden="true"><img src="../../foto-11.jpeg" alt="Foto 11"></div>
+        <div class="footer-photo-slider__slide" aria-hidden="true"><img src="../../foto-12.jpeg" alt="Foto 12"></div>
+        <div class="footer-photo-slider__slide" aria-hidden="true"><img src="../../foto-o3.jpeg" alt="Foto 03"></div>
+      </div>
+    </div>
+
+  </footer>
+
+
+
+  <!-- Lista de posts (se renderiza con backend en reflexiones.js) -->
+  <section class="reflexiones-feed" aria-label="Publicaciones" style="position:relative; z-index:2;">
+    <div class="reflexiones-feed__container" id="reflexiones-feed">
+      <!-- Aquí se insertarán los posts -->
+    </div>
+  </section>
+
+
+  <script src="./reflexiones.js"></script>
+  <script src="./footer_real_time.js"></script>
+  <script src="./footer_photo_dual.js"></script>
+</body>
+</html>
+

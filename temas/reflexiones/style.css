@@ -1,0 +1,527 @@
+/* CSS específico para temas/reflexiones (solo esta carpeta)
+   El diseño base/video vienen del CSS global en ../../css/style.css
+*/
+
+.reflexiones-header {
+  position: relative;
+  z-index: 2;
+
+  margin: 24px auto 0;
+  max-width: 980px;
+  padding: 0 16px;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.reflexiones-header__left h1 {
+  margin: 0;
+}
+
+.reflexiones-header__actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.reflexiones-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 14px;
+  border-radius: 14px;
+  text-decoration: none;
+
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(6px);
+
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.reflexiones-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateY(-1px);
+}
+
+
+.reflexiones-header h1 {
+  margin: 0;
+
+  padding: 16px 18px;
+
+  display: inline-block;
+  border-radius: 14px;
+
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(6px);
+
+  color: rgba(255, 255, 255, 0.95);
+  font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.4rem);
+  letter-spacing: 0.3px;
+}
+
+.reflexiones-footer {
+  position: relative;
+  z-index: 2;
+
+  margin-top: 34px;
+  padding: 20px 16px 28px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.reflexiones-footer .logo2-wrap {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 12px 18px;
+  border-radius: 18px;
+
+  background: rgba(0, 0, 0, 0.32);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
+.reflexiones-footer img {
+  width: 120px;
+  height: auto;
+  opacity: 0.95;
+}
+
+@media (max-width: 480px) {
+  .reflexiones-header h1 {
+    width: 100%;
+  }
+
+  .reflexiones-header__datetime #footer-datetime {
+    padding: 7px 8px;
+    font-size: 0.78rem;
+  }
+
+
+  .reflexiones-footer img {
+    width: 92px;
+  }
+}
+
+/* ====== Banner translucido footer (fecha/hora en tiempo real) ====== */
+.banner-datetime {
+  position: relative;
+  z-index: 2;
+  padding: 14px 16px;
+
+  background: rgba(0, 0, 0, 0.25);
+
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+.banner-datetime__inner {
+  width: min(100%, 1120px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: nowrap;
+}
+
+
+/* Logo del footer hacia un lado (izquierda) */
+.banner-datetime__logo {
+  flex: 0 0 auto;
+  justify-content: flex-start;
+}
+
+
+.banner-datetime__logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner-datetime__logo img {
+  width: 140px;
+  height: auto;
+  transition: transform 180ms ease, opacity 180ms ease;
+  opacity: 0.85;
+}
+
+
+.banner-datetime__logo img:hover {
+  animation: footerLogoBounce 420ms ease;
+}
+
+@keyframes footerLogoBounce {
+  0% { transform: translateY(0) scale(1); }
+  30% { transform: translateY(-3px) scale(1.015); }
+  60% { transform: translateY(1px) scale(1.008); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+
+
+
+/* Slider de fotos debajo del banner */
+.footer-photo-slider-row {
+  width: min(100%, 760px);
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.footer-photo-slider {
+  position: relative;
+  z-index: 2;
+  margin-top: 0;
+  width: 100%;
+  height: 220px;
+
+
+
+
+  border-radius: 14px;
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
+
+  display: block;
+}
+
+
+.footer-photo-slider__slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+
+  opacity: 0;
+  transform: translateY(8px) scale(1.06);
+  filter: saturate(1.05) contrast(1.02);
+
+  transition: opacity 650ms ease, transform 650ms ease, filter 650ms ease;
+}
+
+.footer-photo-slider__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+
+
+
+.footer-photo-slider__slide.is-active {
+  opacity: 0.78;
+
+  transform: translateY(0) scale(1);
+  filter: saturate(1.1) contrast(1.05);
+
+  /* evita “pegado” por cambios de animación */
+  transition-delay: 0ms;
+}
+
+
+
+.footer-photo-slider::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.22), transparent 28%, transparent 72%, rgba(0, 0, 0, 0.22));
+}
+
+
+.reflexiones-header__datetime {
+  width: 100%;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.reflexiones-header__datetime #footer-datetime {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 800;
+  letter-spacing: 0.3px;
+}
+
+
+
+  .banner-datetime__footer-datetime #footer-datetime {
+
+  display: inline-block;
+
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+
+@media (max-width: 480px) {
+  .banner-datetime__logo img {
+    width: 70px;
+  }
+
+  .reflexiones-footer__tales {
+    font-size: 1.2rem;
+    margin: 12px 0 10px;
+    text-align: center;
+  }
+
+
+
+  .footer-photo-slider-row {
+    grid-template-columns: 1fr;
+  }
+
+
+
+  .banner-datetime__inner {
+    gap: 8px;
+  }
+
+  .footer-photo-slider {
+    height: 110px;
+    border-radius: 12px;
+  }
+
+
+
+
+  .banner-datetime__footer-datetime #footer-datetime {
+    padding: 7px 8px;
+    font-size: 0.78rem;
+  }
+}
+
+
+
+
+/* ====== Sección para backend (subir pensamientos) ====== */
+.reflexiones-form {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  justify-content: center;
+  padding: 10px 16px 40px;
+}
+
+
+.reflexiones-form__card {
+  width: 100%;
+  max-width: 980px;
+
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+
+  padding: 18px 16px;
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.35);
+}
+
+.reflexiones-form__card h2 {
+  margin: 6px 0 6px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.98);
+}
+
+.reflexiones-form__hint {
+  margin: 0 0 14px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+#reflexiones-upload {
+  display: grid;
+  gap: 12px;
+}
+
+#reflexiones-upload label {
+  display: grid;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+#reflexiones-upload textarea {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.25);
+  color: rgba(255, 255, 255, 0.95);
+  padding: 12px 12px;
+  outline: none;
+  resize: vertical;
+}
+
+#reflexiones-upload input[type="file"] {
+  width: 100%;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.reflexiones-form__actions {
+  display: flex;
+  justify-content: center;
+  padding-top: 6px;
+}
+
+#reflexiones-upload button {
+  border: 0;
+  border-radius: 14px;
+  padding: 12px 18px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 120ms ease, background 120ms ease;
+}
+
+#reflexiones-upload button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+/* ====== Feed (posts + respuestas) ====== */
+.reflexiones-feed {
+  position: relative;
+  z-index: 2;
+  padding: 0 16px 60px;
+}
+
+.reflexiones-feed__container {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  display: grid;
+  gap: 16px;
+}
+
+.post-card {
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  padding: 16px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+}
+
+.post-card__top {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.post-card__meta {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.post-card__content {
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.post-card__image img {
+  width: 100%;
+  max-height: 380px;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.comments {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.comments h3 {
+  margin: 0 0 10px;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 1.05rem;
+}
+
+.comment-form {
+  display: grid;
+  gap: 10px;
+}
+
+.comment-form textarea {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.25);
+  color: rgba(255, 255, 255, 0.95);
+  padding: 12px 12px;
+  outline: none;
+  resize: vertical;
+}
+
+.comment-form button {
+  justify-self: start;
+  border: 0;
+  border-radius: 14px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 120ms ease, background 120ms ease;
+}
+
+.comment-form button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.comments-list {
+  margin-top: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.comment-item {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.comment-item__author {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.comment-item__text {
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
