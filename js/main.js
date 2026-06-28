@@ -1,67 +1,79 @@
-// Fondo con video + carrusel (Bootstrap) 
-// Si quieres ajustar el comportamiento, hazlo aquí.
+// ============================
+//  CONFIGURACIÓN GLOBAL API
+// ============================
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Generar slides del carrusel con todas las imágenes disponibles en /img
-  // (lista estática para evitar depender de lectura del servidor / filesystem)
-  const carouselInner = document.getElementById('carouselInnerDebora');
-  if (carouselInner) {
-    const imgFiles = [
-      'debora-01.jpeg','debora-02.jpeg','debora-03.jpeg','debora-04.jpeg','debora-05.jpeg',
-      'debora-06.jpeg','debora-07.jpeg','debora-08.jpeg','debora-09.jpeg','debrta-10.jpeg'
-    ];
+const API_URL = "https://bolg-debora.onrender.com/api";
 
-    const fragment = document.createDocumentFragment();
+// GET genérico
+async function apiGet(endpoint) {
+  try {
+    const res = await fetch(`${API_URL}/${endpoint}`);
+    if (!res.ok) throw new Error(`Error GET /${endpoint}: ${res.status}`);
+    return await res.json();
+  } catch (err) {
+    console.error("Error en apiGet:", err);
+    return null;
+  }
+}
 
-    imgFiles.forEach((file, idx) => {
-      const item = document.createElement('div');
-      item.className = 'carousel-item' + (idx === 0 ? ' active' : '');
-
-      const img = document.createElement('img');
-      img.className = 'd-block w-100';
-      img.src = 'img/' + file;
-      img.alt = 'Foto ' + (idx + 1);
-
-      item.appendChild(img);
-      fragment.appendChild(item);
+// POST genérico
+async function apiPost(endpoint, data) {
+  try {
+    const res = await fetch(`${API_URL}/${endpoint}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
     });
 
-    carouselInner.innerHTML = '';
-    carouselInner.appendChild(fragment);
+    if (!res.ok) throw new Error(`Error POST /${endpoint}: ${res.status}`);
+    return await res.json();
+  } catch (err) {
+    console.error("Error en apiPost:", err);
+    return null;
   }
+}
 
-  // Fondo: video
-  const video = document.getElementById('bg-video');
+// ============================
+//  FUNCIONES PARA TU BLOG
+// ============================
 
-  if (video) {
-    // Fuerza play por si el navegador lo pausó al render.
-    video.muted = true;
-    video.playsInline = true;
-    video.play().catch(() => {
-      // Si falla, al menos que exista el elemento.
-    });
-  }
+// Historias
+async function crearHistorias() {
+  const historias = await apiGet("historias");
+  console.log("Historias:", historias);
+  return historias;
+}
 
-  // Carrusel: asegura autoplay
-  const el = document.getElementById('carouselDebora');
-  if (el && window.bootstrap?.Carousel) {
-    window.bootstrap.Carousel.getOrCreateInstance(el, {
-      interval: 3500,
-      pause: 'hover',
-      ride: true
-    });
-  }
+// Reflexiones
+async function crearReflexiones() {
+  const reflexiones = await apiGet("reflexiones");
+  console.log("Reflexiones:", reflexiones);
+  return reflexiones;
+}
 
-  // Parallax: mover el video con el scroll (suave)
-  const onScroll = () => {
-    if (!video) return;
-    const y = window.scrollY || 0;
-    // Desplazamiento proporcional (ajustar si se siente muy fuerte)
-    video.style.transform = `translateY(${y * 0.25}px) scale(1.02)`;
-  };
+// Contacto
+async function enviarContacto(nombre, mensaje) {
+  const respuesta = await apiPost("contacto", { nombre, mensaje });
+  console.log("Contacto enviado:", respuesta);
+  return respuesta;
+}
 
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-});
+// Login
+async function login(email, password) {
+  const respuesta = await apiPost("auth/login", { email, password });
+  console.log("Login:", respuesta);
+  return respuesta;
+}
+
+// ============================
+//  PRUEBA DE CONEXIÓN
+// ============================
+
+async function probarConexion() {
+  const health = await apiGet("health");
+  console.log("Estado del servidor:", health);
+}
+
+probarConexion();
 
 
